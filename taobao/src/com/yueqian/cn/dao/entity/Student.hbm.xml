@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+        SYSTEM
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+    <class name="com.yueqian.cn.dao.entity.User" table="student">
+        <id name="id" column="id" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+
+        <property name="name" column="name" type="string"/>
+        <property name="score" column="score" type="int"/>
+        <property name="sex" column="sex" type="java.lang.String"/>
+        <property name="address" column="address" type="string"/>
+        <property name="birthday" column="birthday" type="date"/>
+        <property name="money" column="money" type="double"/>
+       
+        
+    </class>
+
+</hibernate-mapping>

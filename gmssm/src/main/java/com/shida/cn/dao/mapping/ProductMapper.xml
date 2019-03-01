@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shida.cn.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.shida.cn.dao.model.Product" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="freight" property="freight" jdbcType="REAL" />
+    <result column="expire_time" property="expireTime" jdbcType="TIMESTAMP" />
+    <result column="sell_num" property="sellNum" jdbcType="INTEGER" />
+    <result column="stock_num" property="stockNum" jdbcType="INTEGER" />
+    <result column="sell_address" property="sellAddress" jdbcType="VARCHAR" />
+    <result column="view_num" property="viewNum" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, price, freight, expire_time, sell_num, stock_num, sell_address, view_num, 
+    category_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.shida.cn.dao.model.Product" >
+    insert into tbl_product (id, name, price, 
+      freight, expire_time, sell_num, 
+      stock_num, sell_address, view_num, 
+      category_id)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, 
+      #{freight,jdbcType=REAL}, #{expireTime,jdbcType=TIMESTAMP}, #{sellNum,jdbcType=INTEGER}, 
+      #{stockNum,jdbcType=INTEGER}, #{sellAddress,jdbcType=VARCHAR}, #{viewNum,jdbcType=INTEGER}, 
+      #{categoryId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.shida.cn.dao.model.Product" >
+    insert into tbl_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="freight != null" >
+        freight,
+      </if>
+      <if test="expireTime != null" >
+        expire_time,
+      </if>
+      <if test="sellNum != null" >
+        sell_num,
+      </if>
+      <if test="stockNum != null" >
+        stock_num,
+      </if>
+      <if test="sellAddress != null" >
+        sell_address,
+      </if>
+      <if test="viewNum != null" >
+        view_num,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="freight != null" >
+        #{freight,jdbcType=REAL},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellNum != null" >
+        #{sellNum,jdbcType=INTEGER},
+      </if>
+      <if test="stockNum != null" >
+        #{stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellAddress != null" >
+        #{sellAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="viewNum != null" >
+        #{viewNum,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shida.cn.dao.model.Product" >
+    update tbl_product
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="freight != null" >
+        freight = #{freight,jdbcType=REAL},
+      </if>
+      <if test="expireTime != null" >
+        expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellNum != null" >
+        sell_num = #{sellNum,jdbcType=INTEGER},
+      </if>
+      <if test="stockNum != null" >
+        stock_num = #{stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellAddress != null" >
+        sell_address = #{sellAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="viewNum != null" >
+        view_num = #{viewNum,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shida.cn.dao.model.Product" >
+    update tbl_product
+    set name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      freight = #{freight,jdbcType=REAL},
+      expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      sell_num = #{sellNum,jdbcType=INTEGER},
+      stock_num = #{stockNum,jdbcType=INTEGER},
+      sell_address = #{sellAddress,jdbcType=VARCHAR},
+      view_num = #{viewNum,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 显示首页产品信息 -->
+  <select id="showIndexProdut" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_product 
+    ORDER BY expire_time ASC LIMIT 0,9
+  </select>
+  
+  
+</mapper>

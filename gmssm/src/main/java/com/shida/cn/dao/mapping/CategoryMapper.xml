@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shida.cn.dao.CategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.shida.cn.dao.model.Category" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, parent_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_category
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_category
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.shida.cn.dao.model.Category" >
+    insert into tbl_category (id, name, parent_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shida.cn.dao.model.Category" >
+    insert into tbl_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shida.cn.dao.model.Category" >
+    update tbl_category
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shida.cn.dao.model.Category" >
+    update tbl_category
+    set name = #{name,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getPageCategory" resultMap="BaseResultMap" >
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from tbl_category 
+  	limit #{0},#{1}
+  </select>
+  
+  <select id="getListCategory" resultMap="BaseResultMap" >
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from tbl_category 
+  	limit #{0},#{1}
+  </select>
+  
+  <select id="getTotalCountCategory" resultType="int" >
+  	select 
+  	count(1) 
+  	from tbl_category 
+  </select>
+  
+  <select id="getAll" resultMap="BaseResultMap" >
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from tbl_category 
+  </select>
+  
+  <select id="getCategoryOneName" resultMap="BaseResultMap" >
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from tbl_category 
+  	where 
+  	parent_id IS NULL ORDER BY id ASC
+  </select>
+  
+  <select id="getCategoryTweName" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from tbl_category 
+  	where 
+  	parent_id = #{id} ORDER BY id ASC
+  </select>
+  
+</mapper>

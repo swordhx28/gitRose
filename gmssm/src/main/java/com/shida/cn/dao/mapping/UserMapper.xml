@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shida.cn.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.shida.cn.dao.model.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="my_name" property="myName" jdbcType="VARCHAR" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="pass" property="pass" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="user_img" property="userImg" jdbcType="VARCHAR" />
+    <result column="born_day" property="bornDay" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, my_name, login_name, pass, email, sex, user_img, born_day
+  </sql>
+  
+  <select id="login" resultMap="BaseResultMap" parameterType="com.shida.cn.dao.model.User" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where login_name = #{loginName} and pass = #{pass}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.shida.cn.dao.model.User" >
+    insert into tbl_user (id, my_name, login_name, 
+      pass, email, sex, user_img, 
+      born_day)
+    values (#{id,jdbcType=BIGINT}, #{myName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, 
+      #{pass,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{userImg,jdbcType=VARCHAR}, 
+      #{bornDay,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shida.cn.dao.model.User" >
+    insert into tbl_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="myName != null" >
+        my_name,
+      </if>
+      <if test="loginName != null" >
+        login_name,
+      </if>
+      <if test="pass != null" >
+        pass,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="userImg != null" >
+        user_img,
+      </if>
+      <if test="bornDay != null" >
+        born_day,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="myName != null" >
+        #{myName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="pass != null" >
+        #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null" >
+        #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bornDay != null" >
+        #{bornDay,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shida.cn.dao.model.User" >
+    update tbl_user
+    <set >
+      <if test="myName != null" >
+        my_name = #{myName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null" >
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="pass != null" >
+        pass = #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null" >
+        user_img = #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bornDay != null" >
+        born_day = #{bornDay,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shida.cn.dao.model.User" >
+    update tbl_user
+    set my_name = #{myName,jdbcType=VARCHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      pass = #{pass,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      user_img = #{userImg,jdbcType=VARCHAR},
+      born_day = #{bornDay,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

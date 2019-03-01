@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+		http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+		version="2.4">
+	<welcome-file-list>
+		<welcome-file>index/view.jhtml</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>Dispatcher</servlet-name>
+		<servlet-class>cn.vbox.servlet.Dispatcher</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Dispatcher</servlet-name>
+		<url-pattern>*.jhtml</url-pattern>
+	</servlet-mapping>
+        <!--拦截/m00/group/*开头的图片-->
+	<servlet>
+		<servlet-name>ImageView</servlet-name>
+		<servlet-class> cn.vbox.servlet.ImageView</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ImageView</servlet-name>
+		<url-pattern>/m00/group/*</url-pattern>
+	</servlet-mapping>
+	<filter>
+		<filter-name>firewall</filter-name>
+		<filter-class>cn.vbox.filter.Firewall</filter-class>
+		<init-param>
+			<param-name>passurl</param-name> 
+			<param-value>logout.jhtml</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>firewall</filter-name>
+		<url-pattern>*.jhtml</url-pattern>
+	</filter-mapping>
+	<resource-ref> 
+        <description>DB Connection</description> 
+        <res-ref-name>jdbc/mydata</res-ref-name> 
+        <res-type>javax.sql.DataSource</res-type> 
+        <res-auth>Container</res-auth> 
+    </resource-ref> 
+    
+    <listener>
+    	<!-- 当tomcat启动,根据实体类建表 -->
+    	<listener-class>cn.vbox.init.InitTable</listener-class>
+    	<!-- tomcat启动,文件上传服务 -->
+    	<listener-class>cn.vbox.init.StoreServerInit</listener-class>
+    		<!-- 初始化管理员用户名和密码-->
+    	<listener-class>cn.vbox.init.InitAdmin</listener-class>
+    </listener>
+</web-app>

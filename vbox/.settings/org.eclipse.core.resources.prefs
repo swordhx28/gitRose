@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//WebRoot/WEB-INF/jsp/index.jsp=UTF-8
+encoding//WebRoot/upload.jsp=UTF-8
+encoding//src/cn/vbox/server/Folder.java=UTF-8
+encoding//src/cn/vbox/server/MydfsStorageServer.java=UTF-8
+encoding//src/cn/vbox/server/TrackerServer.java=UTF-8
+encoding//src/cn/vbox/servlet/Dispatcher.java=UTF-8

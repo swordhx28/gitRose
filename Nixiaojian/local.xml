@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Location>
+    <CountryRegion Name="阿尔巴尼亚" Code="ALB">
+        <State>
+            <City Name="爱尔巴桑" Code="EL" />
+        </State>
+    </CountryRegion>
+</Location>

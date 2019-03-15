@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Location>
+  <CountryRegion Name="中国" Code="1">
+    <State Name="四川" Code="sc">
+      <City Name="成都" Code="cd" />
+    </State>
+  </CountryRegion>
+</Location>

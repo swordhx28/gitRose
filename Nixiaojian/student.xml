@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Class>
+    <stu contry="阿尔巴尼亚" Code="ALB">
+       <name>阿尔巴尼亚</name>
+    </stu>
+     <stu contry="中国" Code="China">
+       <name>刘亦菲</name>
+    </stu>
+</Class>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="wrap">
+  <!-- main begin-->
+  <form action="/register" method="post">
+      <div class="zclf login logns">
+        <h1  class="blue">用户注册</h1>
+          <dl>
+            <dd>
+              <label> <small>*</small>用户名</label>
+              <input name="username" type="text" class="inputh lf" th:value="${registerUser.username}" />
+              	<span class="red" th:text="${username}"></span>
+             <div class="lf red laba">用户名要求不低于6个字符</div>
+            </dd>
+            <dd>
+              <label> <small>*</small>密码</label>
+              <input name="userpassword" type="text" class="inputh lf" value="${registerUser.userpassword}" />
+              		<span class="red" th:text="${userpassword}"></span>
+              <div class="lf red laba">密码要求不低于6个字符</div>
+            </dd>
+            <dd>
+              <label> <small>*</small>身份证号</label>
+              <input name="usercardno" type="text" class="inputh lf" value="${registerUser.usercardno}" />
+              	<span class="red" th:text="${usercardno}"></span>
+              <div class="lf red laba">身份证号必填</div>
+            </dd>
+            <dd>
+              <label> <small>*</small>电话</label>
+              <input name="usertel" type="text" class="inputh lf" value="${registerUser.usertel}" />
+              	<span class="red" th:text="${usertel}"></span>
+              <div class="lf red laba">电话号码必填</div>
+            </dd>
+            <dd>
+              <label> <small>*</small>住址</label>
+            </dd>
+            <dd>
+              <label> <small>*</small>邮政编码</label>
+            </dd>
+            <dd class="hegas">
+              <label> <small>*</small>验证码</label>
+               <span class="wordp lf"><img src="images/img2.jpg" width="96" height="27" alt="" /></span>
+               <span class="blues lf"><a href="" title="">看不清</a></span>
+            </dd>
+            <dd class="hegas">
+              <label>&nbsp;</label>
+               <input name=""  type="checkbox" id="rem_u"   />
+              <label for="rem_u" class="labels">我同意<span class="blues">《服务条款》</span></label>
+            </dd>
+            <dd class="hegas">
+              <label>&nbsp;</label>
+              <input name="" type="submit" value="立即注册" class="spbg buttombg buttombgs f14 lf" />
+            </dd>
+          </dl>
+             
+    </div>
+</form>  
+<!-- main end-->
+<!-- footer begin-->
+
+</div>
+ <!--footer end-->
+
+</div>
+</body>
+</html>

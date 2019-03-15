@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>拍卖品列表</title>
+<link href="/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/WebCalendar.js"></script>
+</head>
+
+<body>
+<div class="wrap">
+<!-- main begin-->
+  <div class="sale">
+    <h1 class="lf">在线拍卖系统</h1>
+    <div class="logout right"><a href="#" title="注销">注销</a></div>
+  </div>
+  <div class="forms">
+   <form id="form_query" action="/queryAuctions" method="post">
+		    	
+		    	<input type="hidden" id ="pageNumber" name = "pageNum" value="1" />
+		    	<label for="name">名称</label>
+		        <input name="auctionname" type="text" class="nwinput" id="name" th:value="${condition.auctionname}"/>
+		        <label for="names">描述</label>
+		        <input name="auctiondesc" type="text" id="names" class="nwinput" th:value="${condition.auctiondesc}"/>
+		        
+		        <label for="time">开始时间</label>      
+		        <input name="auctionstarttime" 
+		            th:value="${#dates.format(condition.auctionstarttime,'yyyy-MM-dd hh:mm:ss')}"
+		        	type="text" id="time" class="nwinput" readonly="readonly" onclick="selectDate(this,'yyyy-MM-dd hh:mm:ss')"/>
+		        
+		        <label for="end-time">结束时间</label>
+		        <input name="auctionendtime"
+		        	th:value="${#dates.format(condition.auctionendtime,'yyyy-MM-dd hh:mm:ss')}"
+		        	type="text" id="end-time" class="nwinput" readonly="readonly" onclick="selectDate(this,'yyyy-MM-dd hh:mm:ss')"/>
+		        
+		        <label for="price">起拍价</label>
+		    	<input name="auctionstartprice" type="text" id="price" class="nwinput" th:value="${condition.auctionstartprice}"/>
+		    	<input type="submit"  value="查询" class="spbg buttombg f14  sale-buttom"/>
+     </form>
+    <div th:if="${session.user.userisadmin==1}">
+    	<input type="button"  value="发布" onclick="location='/toAddAuction'" class="spbg buttombg f14  sale-buttom buttomb"/>
+    </div>
+      <div th:if="${session.user.userisadmin==0}">
+    	<input type="button"  value="竞拍结果" onclick="location='/toAuctionResult'" class="spbg buttombg f14  sale-buttom buttomb"/>
+    </div>
+  </div>
+  <div class="items">
+      <ul class="rows even strong">
+        <li>名称</li>
+        <li class="list-wd">描述</li>
+        <li>开始时间</li>
+        <li>结束时间</li>
+        <li>起拍价</li>
+        <li class="borderno">操作</li>
+      </ul>
+      
+      
+      <ul th:each="auction,state:${auctionList}" th:class="${state.odd?'rows':'rows even'}">
+        <li th:text="${auction.auctionname}"></li>
+        <li class="list-wd" th:text="${auction.auctiondesc}"></li>
+        <li th:text="${#dates.format(auction.auctionstarttime,'yyyy-MM-dd hh:mm:ss')}"></li>
+        <li th:text="${#dates.format(auction.auctionendtime,'yyyy-MM-dd hh:mm:ss')}"></li>
+       	<li th:text="${auction.auctionstartprice}"></li>
+        <li class="borderno red">
+        <span th:if="${session.user.userisadmin==0}">
+        	<a th:href="@{/toAuctionDetail/}+@{${auction.auctionid}}" >竞拍</a>
+        </span>
+        <span th:if="${session.user.userisadmin==1}">
+           <a th:href="@{/toUpdate/}+@{${auction.auctionid}}" >修改</a>|
+          <a href="#"  th:onclick="'deleteAuction('+${auction.auctionid}+')'">删除</a>
+          </span>
+        </li>
+      </ul>
+
+      <div class="page">
+      	【当前第<span th:text="${page.pageNum}"></span>页,
+      		总共<span th:text="${page.pages}"></span>页 ,
+      		总记录<span th:text="${page.total}"></span>条
+      	 】
+        <a href="#" th:onclick="jumpPage(1)">首页</a>
+        <a href="#" th:onclick="'jumpPage('+${page.prePage}+')'">上一页</a>
+        <a href="#" th:onclick="'jumpPage('+${page.nextPage}+')'">下一页</a>
+        <a href="#" th:onclick="'jumpPage('+${page.pages}+')'">尾页</a> 
+      </div>
+  </div>
+  <script>
+  	function jumpPage(pageNo){
+  		document.getElementById("pageNumber").value=pageNo;
+  		document.getElementById("form_query").submit() ;
+  	}
+  	
+  	function deleteAuction(auctionid){
+  		if(confirm("是否需要删除该商品？")){
+  			location='/removeAuction/'+auctionid;
+  		}
+  	}
+  	
+  </script>
+<!-- main end-->
+</div>
+</body>
+</html>

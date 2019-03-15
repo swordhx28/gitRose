@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123
+    url: 'jdbc:mysql://localhost:3306/auctiondb?useUnicode=true&characterEncoding=UTF-8'
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  
+      
+        
